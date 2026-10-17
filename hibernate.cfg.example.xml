@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Conexión a la base de datos -->
+        <property name="hibernate.connection.driver_class">
+            com.mysql.cj.jdbc.Driver
+        </property>
+        <property name="hibernate.connection.url">
+            jdbc:mysql://localhost:3306/bd_proyectojavafx?useSSL=false&amp;serverTimezone=America/El_Salvador
+        </property>
+        <property name="hibernate.connection.username">
+            root
+        </property>
+        <property name="hibernate.connection.password"></property>
+
+        <!-- Depuración: mostrar el SQL que genera Hibernate -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Crea/actualiza las tablas según las entidades -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Entidades registradas -->
+        <mapping class="renathyu0015.proyectojavafx.entidades.Usuario"/>
+    </session-factory>
+</hibernate-configuration>

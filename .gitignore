@@ -1,0 +1,11 @@
+# Carpeta de compilación de Maven (se genera sola)
+target/
+
+# Configuración de Hibernate (contiene usuario y clave de la base)
+src/main/resources/hibernate.cfg.xml
+
+# Archivos privados de NetBeans
+nbproject/private/
+
+# Archivos ocultos de macOS
+.DS_Store

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="renathyu0015.proyectojavafx.HomeController">
+    <children>
+        <Label fx:id="lblBienvenida" text="Bienvenido">
+            <style>-fx-font-size: 20px;</style>
+        </Label>
+        <Hyperlink onAction="#cerrarSesion" text="Cerrar sesión" />
+    </children>
+</VBox>
