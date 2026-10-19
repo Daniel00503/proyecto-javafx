@@ -3,6 +3,7 @@ package renathyu0015.proyectojavafx.dao;
 import renathyu0015.proyectojavafx.entidades.Usuario;
 import renathyu0015.proyectojavafx.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class UsuarioDAO {
 
@@ -22,4 +23,24 @@ public class UsuarioDAO {
                     .orElse(null);
         }
     }
+    
+    public boolean registrar (Usuario nuevoUsuario){
+        Transaction transaccion = null;
+        try(Session sesion = HibernateUtil.getSessionFactory().openSession()) {
+            
+            transaccion = sesion.beginTransaction();
+            
+            sesion.persist(nuevoUsuario);
+            
+            transaccion.commit();
+            return true;
+        } catch (Exception e){
+            if (transaccion != null){
+                transaccion.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
 }
