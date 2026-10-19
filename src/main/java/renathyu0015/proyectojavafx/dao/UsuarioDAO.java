@@ -9,6 +9,7 @@ public class UsuarioDAO {
 
     /**
      * Busca un usuario ACTIVO con ese correo y clave.
+     *
      * @return el Usuario encontrado o null si las credenciales no coinciden
      */
     public Usuario autenticar(String correo, String clave) {
@@ -24,18 +25,37 @@ public class UsuarioDAO {
         }
     }
     
-    public boolean registrar (Usuario nuevoUsuario){
+    // Metodo para verificar si el correo ya existe en la base de datos
+    public boolean existeCorreo(String correo){
+        
+        // Consulta a la base de datos
+        String hql = "SELECT COUNT(u) FROM Usuario u WHERE u.Correo = :correo";
+        
+        try (Session sesion = HibernateUtil.getSessionFactory().openSession()){
+            Long conteo = sesion.createQuery(hql, Long.class)
+                    .setParameter("correo", correo)
+                    .uniqueResult();
+
+            return conteo > 0;// Si el correo ya esta registrado devuelve true, sino false.
+            } catch (Exception e){
+                e.printStackTrace();
+                return false;
+        }
+
+    }
+
+    public boolean registrar(Usuario nuevoUsuario) {
         Transaction transaccion = null;
-        try(Session sesion = HibernateUtil.getSessionFactory().openSession()) {
-            
+        try (Session sesion = HibernateUtil.getSessionFactory().openSession()) {
+
             transaccion = sesion.beginTransaction();
-            
             sesion.persist(nuevoUsuario);
-            
             transaccion.commit();
+            
             return true;
-        } catch (Exception e){
-            if (transaccion != null){
+            
+        } catch (Exception e) {
+            if (transaccion != null) {
                 transaccion.rollback();
             }
             e.printStackTrace();
@@ -43,4 +63,6 @@ public class UsuarioDAO {
         }
     }
     
+    
+
 }
