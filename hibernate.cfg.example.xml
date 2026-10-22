@@ -26,5 +26,6 @@
 
         <!-- Entidades registradas -->
         <mapping class="renathyu0015.proyectojavafx.entidades.Usuario"/>
+        <mapping class="renathyu0015.proyectojavafx.entidades.Aula"/>
     </session-factory>
 </hibernate-configuration>

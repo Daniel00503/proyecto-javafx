@@ -20,14 +20,14 @@ public class App extends Application {
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    // public: los controladores ahora están en otro paquete (controladores)
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        // La "/" al inicio busca el FXML desde la raíz de resources,
-        // sin importar cómo se llame el paquete del proyecto
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/" + fxml + ".fxml"));
+        // Las vistas están en src/main/resources/vistas/
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vistas/" + fxml + ".fxml"));
         return fxmlLoader.load();
     }
 

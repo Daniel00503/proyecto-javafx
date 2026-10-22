@@ -9,6 +9,7 @@ module renathyu0015.proyectojavafx {
 
     // Permisos para que otros lean nuestras clases por dentro
     opens renathyu0015.proyectojavafx to javafx.fxml;
+    opens renathyu0015.proyectojavafx.controladores to javafx.fxml;
     opens renathyu0015.proyectojavafx.entidades to org.hibernate.orm.core;
 
     // Paquete visible desde afuera (ahí está App)

@@ -26,3 +26,22 @@ CREATE TABLE IF NOT EXISTS usuariossistema (
 -- MD5() calcula el hash: nunca escribir el hash a mano.
 INSERT INTO usuariossistema (Nombre, Apellido, Usuario, Clave, Correo, Roll, Estado)
 VALUES ('Admin', 'Sistema', 'admin', MD5('admin123'), 'admin@correo.com', 'ADMIN', 'ACTIVO');
+
+
+-- =====================================================
+-- Laboratorio 3: aulas
+-- =====================================================
+
+-- tipo_aula y estado deben coincidir letra por letra
+-- con los enums TipoAula y EstadoAula de Java.
+CREATE TABLE IF NOT EXISTS aulas (
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    nombre       VARCHAR(50)  NOT NULL,
+    edificio     VARCHAR(50)  NOT NULL,
+    planta       INT          NOT NULL,
+    capacidad    INT          NOT NULL,
+    tipo_aula    ENUM('NORMAL','CENTRO_DE_COMPUTO','LABORATORIO','ESPECIAL') NOT NULL,
+    responsable  VARCHAR(100) NOT NULL,
+    estado       ENUM('ASIGNADA','ASIGNADA_TEMPORALMENTE','EN_MANTENIMIENTO','DISPONIBLE') NOT NULL,
+    CONSTRAINT uk_aulas_nombre_edificio UNIQUE (nombre, edificio)
+);
