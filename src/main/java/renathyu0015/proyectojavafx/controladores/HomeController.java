@@ -1,6 +1,7 @@
-package renathyu0015.proyectojavafx;
+package renathyu0015.proyectojavafx.controladores;
 
 import java.io.IOException;
+import renathyu0015.proyectojavafx.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import renathyu0015.proyectojavafx.entidades.Usuario;
