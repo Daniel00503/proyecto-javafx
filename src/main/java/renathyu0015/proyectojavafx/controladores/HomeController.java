@@ -34,7 +34,7 @@ public class HomeController {
     private final AulaDAO aulaDAO = new AulaDAO();
 
     @FXML
-    private void iniciar() {
+    private void initialize() {
         Usuario usuario = SesionUsuario.getUsuarioActual();
         if (usuario != null) {
             lblBienvenida.setText("Bienvenido, " + usuario.getNombre() + " " + usuario.getApellido());
