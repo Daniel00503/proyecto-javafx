@@ -1,12 +1,13 @@
 package renathyu0015.proyectojavafx.controladores;
 
 import java.io.IOException;
-import renathyu0015.proyectojavafx.App;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import renathyu0015.proyectojavafx.App;
 import renathyu0015.proyectojavafx.dao.UsuarioDAO;
 import renathyu0015.proyectojavafx.entidades.Usuario;
 import renathyu0015.proyectojavafx.util.HashUtil;
@@ -21,41 +22,47 @@ public class LoginController {
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     @FXML
+    private void iniciar() {
+        lblMensaje.setText("");
+    }
+
+    @FXML
     private void ingresar() {
         String correo = txtCorreo.getText().trim();
         String clave = txtClave.getText();
 
         if (correo.isEmpty() || clave.isEmpty()) {
-            lblMensaje.setText("Complete todos los campos.");
+            mostrarError("Complete todos los campos.");
             return;
         }
 
         try {
-            // Convertimos la contraseña escrita a MD5 antes de compararla
-            String claveHash = HashUtil.md5(clave);
-
-            Usuario usuario = usuarioDAO.autenticar(correo, claveHash);
+            // La base de datos almacena las contraseñas mediante MD5.
+            Usuario usuario = usuarioDAO.autenticar(correo, HashUtil.md5(clave));
 
             if (usuario == null) {
-                lblMensaje.setText("Correo o contraseña incorrectos.");
+                mostrarError("Correo o contraseña incorrectos.");
                 txtClave.clear();
                 return;
             }
 
-            SesionUsuario.iniciar(usuario);   // guardamos quién entró
-            App.setRoot("home");              // navegamos a Home
-
+            SesionUsuario.iniciar(usuario);
+            App.setRoot("home");
         } catch (Exception e) {
-            lblMensaje.setText("No se pudo conectar con la base de datos.");
+            mostrarError("No se pudo conectar con la base de datos.");
             e.printStackTrace();
         }
     }
 
-    // NUEVO: se ejecuta al hacer clic en "¿No tienes cuenta? Regístrate"
     @FXML
     private void irARegistro() throws IOException {
-        Stage stage = (Stage) lblMensaje.getScene().getWindow();
         App.setRoot("registro");
-        stage.setHeight(560);   // la pantalla de registro necesita más alto
+        Stage stage = (Stage) lblMensaje.getScene().getWindow();
+        stage.setHeight(560);
+    }
+
+    private void mostrarError(String mensaje) {
+        lblMensaje.setStyle("-fx-text-fill: red;");
+        lblMensaje.setText(mensaje);
     }
 }
